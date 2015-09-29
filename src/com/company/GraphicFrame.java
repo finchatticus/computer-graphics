@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.graphics.GraphicsController;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -29,8 +31,11 @@ public class GraphicFrame extends JFrame {
     private void init() {
         c = getContentPane();
         c.setLayout(new BorderLayout()); // ��������� ��������� ����������
-        create_PaintGraph();
-        c.add(pg, BorderLayout.CENTER); // ������� ����������
+        //create_PaintGraph();
+        GraphicsController graphicsArea = new GraphicsController();
+        graphicsArea.setSize(600, 600);
+        c.add(graphicsArea,BorderLayout.CENTER);
+        //c.add(pg, BorderLayout.CENTER); // ������� ����������
         setSize(900, 700); // ������� ��������
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ������� ����������
 
@@ -42,7 +47,7 @@ public class GraphicFrame extends JFrame {
         c.add(panel_managment, BorderLayout.EAST);
 
         Mouse mouse = new Mouse(this);
-        pg.addMouseMotionListener(mouse);
+        //pg.addMouseMotionListener(mouse);
     }
 
     private void create_PaintGraph() {
