@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.graphics.GraphicsController;
+import com.company.listeners.Mouse;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +10,7 @@ import java.awt.*;
  * Created by cooper on 24.09.15.
  */
 public class GraphicFrame extends JFrame {
-    private PaintGraph pg; // ����� ������ ������� �������
+    private GraphicsController graphicsArea;
     public final JTextField textPane_x = new JTextField(10);
     public final JTextField textPane_y = new JTextField(10);
     public final JTextField textFieldPixelX = new JTextField(10);
@@ -30,40 +31,18 @@ public class GraphicFrame extends JFrame {
 
     private void init() {
         c = getContentPane();
-        c.setLayout(new BorderLayout()); // ��������� ��������� ����������
-        //create_PaintGraph();
-        GraphicsController graphicsArea = new GraphicsController();
+        c.setLayout(new BorderLayout());
+        graphicsArea = new GraphicsController();
         graphicsArea.setSize(600, 600);
         c.add(graphicsArea,BorderLayout.CENTER);
-        //c.add(pg, BorderLayout.CENTER); // ������� ����������
-        setSize(900, 700); // ������� ��������
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ������� ����������
-
-
-/*        JPanel panel_coords = createPanel_coords();
-        c.add(panel_coords, BorderLayout.SOUTH);*/
+        setSize(900, 700);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel_managment = createPanel_managment();
         c.add(panel_managment, BorderLayout.EAST);
 
         Mouse mouse = new Mouse(this);
-        //pg.addMouseMotionListener(mouse);
-    }
-
-    private void create_PaintGraph() {
-        pg = new PaintGraph(); // ������������� ������ ���������� ������� �������
-        pg.setSize(600, 600); // ������� ��������
-    }
-
-    private JPanel createPanel_coords() {
-        JPanel textPane = new JPanel();
-        textPane.setLayout(new BoxLayout(textPane, BoxLayout.Y_AXIS));
-        textPane.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
-        textPane.add(Box.createHorizontalGlue());
-        textPane.add(Box.createRigidArea(new Dimension(10, 0)));
-        textPane.add(textPane_x);
-        textPane.add(textPane_y);
-        return textPane;
+        graphicsArea.addMouseMotionListener(mouse);
     }
 
     private JPanel createPanel_managment() {
@@ -102,20 +81,7 @@ public class GraphicFrame extends JFrame {
         managmentPane.add(labelE);
         managmentPane.add(textFieldSizeE);
         managmentPane.add(buttonDraw);
-        //managmentPane.add()
-/*        constraints.anchor = GridBagConstraints.WEST;
-        constraints.insets = new Insets(10, 10, 10, 10);
 
-        Component labelUsername = new JLabel("123");
-        Component textUsername = new JTextField(10);
-
-        // add components to the panel
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        managmentPane.add(labelUsername, constraints);
-
-        constraints.gridx = 1;
-        managmentPane.add(textUsername, constraints);*/
         return managmentPane;
     }
 }

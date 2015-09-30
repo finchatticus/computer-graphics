@@ -1,4 +1,6 @@
-package com.company;
+package com.company.listeners;
+
+import com.company.GraphicFrame;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -21,9 +23,6 @@ public class Mouse implements MouseMotionListener {
         graphicFrame.textPane_y.setText(getCoordY(e.getY()));
         graphicFrame.textFieldPixelX.setText(String.valueOf(e.getX()));
         graphicFrame.textFieldPixelY.setText(String.valueOf(e.getY()));
-        System.out.println(e.getX());
-        System.out.println(e.getY());
-
     }
 
     public void mouseDragged(MouseEvent e) {

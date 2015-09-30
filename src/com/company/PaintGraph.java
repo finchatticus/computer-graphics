@@ -3,16 +3,12 @@ package com.company;
 /**
  * Created by vlad on 14.09.2015.
  */
+import com.company.util.Coord;
+
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.event.*;
-import java.awt.image.ImageObserver;
 import java.lang.*;
-import java.text.AttributedCharacterIterator;
-import java.awt.RenderingHints;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static com.company.util.Arrays.listToArr;
@@ -137,7 +133,7 @@ public class PaintGraph extends JPanel
 
         //up graph
         for (double i = -14.0; i < -8.0; i+= 0.1) {
-            y.add(Coord.getCoordByPixelY(Math.sqrt( 36 - Math.pow(i + 8, 2))));
+            y.add(Coord.getCoordByPixelY(Math.sqrt(36 - Math.pow(i + 8, 2))));
             x.add(Coord.getCoordByPixelX(i));
         }
 
