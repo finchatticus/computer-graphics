@@ -9,16 +9,15 @@ import java.awt.event.MouseMotionListener;
  * Created by vlad on 24.09.2015.
  */
 
-public class Mouse implements MouseMotionListener {
+public class MouseListener implements MouseMotionListener {
 
     private final GraphicFrame graphicFrame;
 
-    public Mouse(GraphicFrame graphicFrame) {
+    public MouseListener(GraphicFrame graphicFrame) {
         this.graphicFrame = graphicFrame;
     }
 
     public void mouseMoved(MouseEvent e) {
-
         graphicFrame.textPane_x.setText(getCoordX(e.getX()));
         graphicFrame.textPane_y.setText(getCoordY(e.getY()));
         graphicFrame.textFieldPixelX.setText(String.valueOf(e.getX()));

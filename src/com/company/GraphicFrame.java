@@ -1,7 +1,10 @@
 package com.company;
 
+import com.company.charts.ChartLine;
 import com.company.graphics.GraphicsController;
-import com.company.listeners.Mouse;
+import com.company.listeners.ButtonClearListener;
+import com.company.listeners.ButtonDrawListener;
+import com.company.listeners.MouseListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,16 +14,18 @@ import java.awt.*;
  */
 public class GraphicFrame extends JFrame {
     private GraphicsController graphicsArea;
+    private ChartLine chartLine;
     public final JTextField textPane_x = new JTextField(10);
     public final JTextField textPane_y = new JTextField(10);
     public final JTextField textFieldPixelX = new JTextField(10);
     public final JTextField textFieldPixelY = new JTextField(10);
-    private final JTextField textFieldSizeA = new JTextField(10);
-    private final JTextField textFieldSizeB = new JTextField(10);
-    private final JTextField textFieldSizeC = new JTextField(10);
-    private final JTextField textFieldSizeD = new JTextField(10);
-    private final JTextField textFieldSizeE = new JTextField(10);
-    private final JButton buttonDraw = new JButton("Draw");
+    public final JTextField textFieldSizeA = new JTextField(10);
+    public final JTextField textFieldSizeB = new JTextField(10);
+    public final JTextField textFieldSizeC = new JTextField(10);
+    public final JTextField textFieldSizeD = new JTextField(10);
+    public final JTextField textFieldSizeE = new JTextField(10);
+    public final JButton buttonDraw = new JButton("Draw");
+    public final JButton buttonClear = new JButton("Clear");
 
 
     private Container c;
@@ -32,17 +37,23 @@ public class GraphicFrame extends JFrame {
     private void init() {
         c = getContentPane();
         c.setLayout(new BorderLayout());
-        graphicsArea = new GraphicsController();
-        graphicsArea.setSize(600, 600);
-        c.add(graphicsArea,BorderLayout.CENTER);
+        //graphicsArea = new GraphicsController();
+        //graphicsArea.setSize(600, 600);
+        //c.add(graphicsArea,BorderLayout.CENTER);
+        chartLine = new ChartLine();
+        chartLine.setPreferredSize(new Dimension(600,600));
+        c.add(chartLine,BorderLayout.CENTER);
         setSize(900, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        textFieldSizeB.setText("40");
 
         JPanel panel_managment = createPanel_managment();
         c.add(panel_managment, BorderLayout.EAST);
 
-        Mouse mouse = new Mouse(this);
-        graphicsArea.addMouseMotionListener(mouse);
+        //MouseListener mouseListener = new MouseListener(this);
+        //graphicsArea.addMouseMotionListener(mouseListener);
+
     }
 
     private JPanel createPanel_managment() {
@@ -60,6 +71,7 @@ public class GraphicFrame extends JFrame {
         textPane_y.setEditable(false);
         textFieldPixelX.setEditable(false);
         textFieldPixelY.setEditable(false);
+
 
         JPanel managmentPane = new JPanel(new GridLayout(0,2));
         managmentPane.add(labelX);
@@ -81,7 +93,21 @@ public class GraphicFrame extends JFrame {
         managmentPane.add(labelE);
         managmentPane.add(textFieldSizeE);
         managmentPane.add(buttonDraw);
+        managmentPane.add(buttonClear);
+
+        ButtonDrawListener buttonDrawListener = new ButtonDrawListener(this, graphicsArea);
+        buttonDraw.addActionListener(buttonDrawListener);
+
+        ButtonClearListener buttonClearListener = new ButtonClearListener(this, graphicsArea);
+        buttonClear.addActionListener(buttonClearListener);
 
         return managmentPane;
+    }
+
+    public GraphicsController getGraphicsArea(){
+        return graphicsArea;
+    }
+    public ChartLine getChartLine(){
+        return chartLine;
     }
 }

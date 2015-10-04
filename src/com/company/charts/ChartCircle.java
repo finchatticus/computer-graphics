@@ -21,6 +21,7 @@ public class ChartCircle extends JPanel {
     private double x2;
     private double l; // (l)*(r^2 - (x-a)^2)^(1/2)
     private Color color;
+    private Polygon polygon;
 
     public ChartCircle(Graphics g,double x1,double x2,double a,double b,double r,double l) {
         this.x1 = x1;
@@ -46,6 +47,8 @@ public class ChartCircle extends JPanel {
 
     public void paint(Graphics g) {
 
+        g.setColor(color);
+
         java.util.List<Integer> x = new ArrayList<Integer>();
         java.util.List<Integer> y = new ArrayList<Integer>();
 
@@ -57,8 +60,12 @@ public class ChartCircle extends JPanel {
 
         int[] xArr = listToArr(x);
         int[] yArr = listToArr(y);
-
-        g.drawPolyline(xArr,yArr, xArr.length);
+        polygon = new Polygon(xArr,yArr,xArr.length);
+        //g.drawPolyline(polygon.xpoints,polygon.ypoints,polygon.npoints);
+        //g.drawPolyline(xArr,yArr, xArr.length);
     }
 
+    public Polygon getPolygon() {
+        return polygon;
+    }
 }
