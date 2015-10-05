@@ -48,5 +48,5 @@ public class ChartCircle {
 
     public int getnPoints() {
         return nPoints;
-    }
+}
 }
