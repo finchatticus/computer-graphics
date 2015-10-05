@@ -1,7 +1,7 @@
 package com.company;
 
-import com.company.charts.ChartLine;
-import com.company.graphics.GraphicsController;
+import com.company.graphics.DrawPolygon;
+import com.company.graphics.PaintGraph;
 import com.company.listeners.ButtonClearListener;
 import com.company.listeners.ButtonDrawListener;
 import com.company.listeners.MouseListener;
@@ -13,8 +13,8 @@ import java.awt.*;
  * Created by cooper on 24.09.15.
  */
 public class GraphicFrame extends JFrame {
-    private GraphicsController graphicsArea;
-    private ChartLine chartLine;
+    private DrawPolygon drawPolygon;
+    private PaintGraph paintGraph;
     public final JTextField textPane_x = new JTextField(10);
     public final JTextField textPane_y = new JTextField(10);
     public final JTextField textFieldPixelX = new JTextField(10);
@@ -37,12 +37,19 @@ public class GraphicFrame extends JFrame {
     private void init() {
         c = getContentPane();
         c.setLayout(new BorderLayout());
-        //graphicsArea = new GraphicsController();
-        //graphicsArea.setSize(600, 600);
-        //c.add(graphicsArea,BorderLayout.CENTER);
-        chartLine = new ChartLine();
+
+        paintGraph = new PaintGraph();
+        paintGraph.setSize(600,600);
+        c.add(paintGraph,BorderLayout.CENTER);
+
+/*        graphicsArea = new GraphicsController();
+        graphicsArea.setSize(600, 600);
+        c.add(graphicsArea,BorderLayout.CENTER);*/
+
+/*        chartLine = new ChartLine();
         chartLine.setPreferredSize(new Dimension(600,600));
-        c.add(chartLine,BorderLayout.CENTER);
+        c.add(chartLine,BorderLayout.CENTER);*/
+
         setSize(900, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -51,8 +58,11 @@ public class GraphicFrame extends JFrame {
         JPanel panel_managment = createPanel_managment();
         c.add(panel_managment, BorderLayout.EAST);
 
-        //MouseListener mouseListener = new MouseListener(this);
-        //graphicsArea.addMouseMotionListener(mouseListener);
+/*        MouseListener mouseListener = new MouseListener(this);
+        graphicsArea.addMouseMotionListener(mouseListener);*/
+
+        MouseListener mouseListener = new MouseListener(this);
+        paintGraph.addMouseMotionListener(mouseListener);
 
     }
 
@@ -95,19 +105,16 @@ public class GraphicFrame extends JFrame {
         managmentPane.add(buttonDraw);
         managmentPane.add(buttonClear);
 
-        ButtonDrawListener buttonDrawListener = new ButtonDrawListener(this, graphicsArea);
+        ButtonDrawListener buttonDrawListener = new ButtonDrawListener(this, paintGraph);
         buttonDraw.addActionListener(buttonDrawListener);
 
-        ButtonClearListener buttonClearListener = new ButtonClearListener(this, graphicsArea);
+        ButtonClearListener buttonClearListener = new ButtonClearListener(this, paintGraph);
         buttonClear.addActionListener(buttonClearListener);
 
         return managmentPane;
     }
 
-    public GraphicsController getGraphicsArea(){
-        return graphicsArea;
-    }
-    public ChartLine getChartLine(){
-        return chartLine;
+    public DrawPolygon getDrawPolygon(){
+        return drawPolygon;
     }
 }

@@ -1,7 +1,7 @@
 package com.company.listeners;
 
 import com.company.GraphicFrame;
-import com.company.graphics.GraphicsController;
+import com.company.graphics.PaintGraph;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,15 +11,15 @@ import java.awt.event.ActionListener;
  */
 public class ButtonClearListener implements ActionListener {
     private final GraphicFrame graphicFrame;
-    private final GraphicsController graphicArea;
+    private final PaintGraph paintGraph;
 
-    public ButtonClearListener(GraphicFrame graphicFrame, GraphicsController graphicsArea) {
-        this.graphicArea = graphicsArea;
+    public ButtonClearListener(GraphicFrame graphicFrame, PaintGraph paintGraph) {
         this.graphicFrame = graphicFrame;
+        this.paintGraph = paintGraph;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        graphicFrame.getChartLine().clearPolygon();
+        paintGraph.clearPolygon();
     }
 }

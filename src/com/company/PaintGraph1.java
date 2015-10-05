@@ -13,10 +13,10 @@ import java.util.List;
 
 import static com.company.util.Arrays.listToArr;
 
-public class PaintGraph extends JPanel
+public class PaintGraph1 extends JPanel
 {
 
-    public PaintGraph()
+    public PaintGraph1()
     {
 
     }

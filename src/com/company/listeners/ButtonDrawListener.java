@@ -1,19 +1,11 @@
 package com.company.listeners;
 
 import com.company.GraphicFrame;
-import com.company.charts.ChartCircle;
 import com.company.charts.ChartLine;
-import com.company.graphics.GraphicsController;
-import com.company.util.Coord;
+import com.company.graphics.PaintGraph;
 
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.LinkedList;
-
-import static com.company.util.Arrays.listToArr;
 
 
 /**
@@ -22,21 +14,22 @@ import static com.company.util.Arrays.listToArr;
 public class ButtonDrawListener implements ActionListener {
 
     private final GraphicFrame graphicFrame;
-    private final GraphicsController graphicArea;
+    private final PaintGraph paintGraph;
 
-    public ButtonDrawListener(GraphicFrame graphicFrame, GraphicsController graphicsArea) {
-        this.graphicArea = graphicsArea;
+    public ButtonDrawListener(GraphicFrame graphicFrame,PaintGraph paintGraph) {
         this.graphicFrame = graphicFrame;
+        this.paintGraph = paintGraph;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         //graphicFrame.textFieldSizeB.setText("40");
-        String B = graphicFrame.textFieldSizeB.getText();
+/*        String B = graphicFrame.textFieldSizeB.getText();
         System.out.println("Ok");
         System.out.println(B);
         Double B1 = Double.valueOf(B);
         double y1 = B1/20.0;
+        paintGraph.clearPolygon();
 
         java.util.List<Integer> xValue = new ArrayList<Integer>();
         java.util.List<Integer> yValue = new ArrayList<Integer>();
@@ -53,7 +46,18 @@ public class ButtonDrawListener implements ActionListener {
         int[] xArr = listToArr(xValue);
         int[] yArr = listToArr(yValue);
 
-        graphicFrame.getChartLine().addPolygon(xArr,yArr,xArr.length);
+
+        paintGraph.addPolygon(xArr,yArr,xArr.length);*/
+
+        ChartLine chartLine = new ChartLine(-8.0 + 2.0 * Math.sqrt(3.0),7,2);
+        paintGraph.addPolygon(chartLine.getxPoints(), chartLine.getyPoints(), chartLine.getnPoints());
+
+        ChartLine chartLine1 = new ChartLine(-8.0 + 2.0 * Math.sqrt(3.0),7,-2);
+        paintGraph.addPolygon(chartLine1.getxPoints(), chartLine1.getyPoints(), chartLine1.getnPoints());
+
+
+
+        //graphicFrame.getChartLine().addPolygon(xArr,yArr,xArr.length);
         //graphicFrame.getChartLine().clearPolygon();
 
 
